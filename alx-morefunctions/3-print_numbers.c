@@ -8,15 +8,12 @@
    void print_numbers(void) 
    {
     int i;
-    char num_char;
 
-    for (i = 0; i < 10; i++) 
-    {
-        num_char = i + '0';  // Convert integer to corresponding ASCII character
-        putchar(num_char);
-    }
-
-    putchar('\n');
+	for (i = 48; i <= 57; i++)
+	{
+		_putchar(i);
+	}
+	_putchar(10);
 }
 
 int main(void)
