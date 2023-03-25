@@ -12,12 +12,12 @@ int main()
     int day_converted;
 
     day = 29;
-    month = 02;
+    month = 01;
     year = 2000;
 
-    day_converted = convert_day(month,day);
+    day = convert_day(month,day);
 
-    print_remaining_days(month, day_converted, year);
+    print_remaining_days(month, day, year);
 
     return (0);
 }
@@ -79,17 +79,15 @@ int convert_day(int month, int day)
 
 void print_remaining_days(int month, int day, int year)
 {
-    int feb;
-
     if ((year % 4 == 0) || (year % 400 == 0 && !(year % 100 == 0)))
     {
-        if (month == 2 && month <= 29)
+        if (month > 2)
         {
-            feb = day;
+            day++;
         }
 
         printf("Day of the year: %d\n", day);
-        printf("Remaining days: %d\n", 366 - feb);
+        printf("Remaining days: %d\n", 366 - day);
     }
     else
     {
