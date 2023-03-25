@@ -12,7 +12,7 @@ int main()
     int day_converted;
 
     day = 29;
-    month = 01;
+    month = 02;
     year = 2000;
 
     day = convert_day(month,day);
@@ -28,50 +28,38 @@ int convert_day(int month, int day)
     {
         case 2:
             day = 31 + day;
-            printf("%d", day);
             break;
         case 3:
             day = 59 + day;
-            printf("%d", day);
             break;
         case 4:
             day = 90 + day;
-            printf("%d", day);
             break;
         case 5:
             day = 120 + day;
-            printf("%d", day);
             break;
         case 6:
             day = 151 + day;
-            printf("%d", day);
             break;
         case 7:
             day = 181 + day;
-            printf("%d", day);
             break;
         case 8:
             day = 212 + day;
-            printf("%d", day);
             break;
         case 9:
             day = 243 + day;
-            printf("%d", day);
             break;
         case 10:
             day = 273 + day;
-            printf("%d", day);
             break;
         case 11:
             day = 304 + day;
-            printf("%d", day);
             break;
         case 12:
             day = 334 + day;
-            printf("%d", day);
             break;
         default:
-
             break;
     }
     return (day);
