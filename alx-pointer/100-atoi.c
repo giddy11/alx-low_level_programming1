@@ -10,29 +10,35 @@
 
 int _atoi(char *s)
 {
-    int sign = 1;
-    int result = 0;
+    int total = 0;
+    int  sign = 1;
+    char not_a_num = 0;
 
-    while (*s == ' ')
+    while (*s != '\0')
     {
+        if (*s == '-')
+        {
+            sign *= -1;
+        }
+
+        if (*s >= '0' && *s <= '9')
+        {
+            not_a_num = 1;
+            total = total * 10 + *s - '0';
+        }
+        else if (not_a_num)
+        {
+            break;
+        }
+
         s++;
     }
 
-    if (*s == '-')
+    if(sign < 0)
     {
-        sign = -1;
-        s++;
+        total = -total;
     }
-    else if (*s == '+')
-    {
-        s++;
-    }
-
-    while (*s >= '0' && *s <= '9')
-    {
-        result = result * 10 + (*s - '0');
-        s++;
-    }
-
-    return result * sign;
+    
+    return total;
+    
 }
