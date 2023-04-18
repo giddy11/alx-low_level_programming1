@@ -9,28 +9,47 @@
 
 char *cap_string(char *str)
 {
-        int i, j;
-        char arr[] = {' ','     ', '\n', ',', ';', '.', '!', '?', '"', '(', ')', '{', '}'};
+        int i, k, j, cap_next;
+        cap_next = 1;
+        // char arr[] = {32,9, 10, 44, 59, 46, 33, 63, 34, 40, 41, 123, 125};
+        char arr[] = {' ', '.'};
+        k = 0;
 
-        for (i = 0; arr[i] != '\0'; i++)
+        while (str[k] != '\0')
         {
-        }
-
-        for (j = 0; j != '\0'; j++)
-        {
-                
+            k++;
         }
         
-        
+
+        for (i = 0; i < k ; i++)
+        {
+            if (str[i] >= 97 && str[i] <= 122) 
+            {
+                    // str[i] = str[i] - 32;
+                        for (j = 0; arr[j] != '\0'; j++)
+                        {
+                            if (arr[j] == str[i])
+                                {
+                                        str[i+1] = str[i+1] - 32;
+                                }
+                        }
+            }
+            
+        }
+
+        return str;
 }
 
 int main(void)
 {
-    char str[] = "Expect the best. Prepare for the worst. Capitalize on what comes.\nhello world! hello-world 0123456hello world\thello world.hello world\n";
+    // char str[] = "Expect the best. Prepare for the worst. Capitalize on what comes.\nhello world! hello-world 0123456hello world\thello world.hello world\n";
+    char str[] = "yes i. love you, so much.";
     char *ptr;
 
     ptr = cap_string(str);
     printf("%s", ptr);
-    printf("%s", str);
+    // printf("%s", str);
+
+
     return (0);
 }
