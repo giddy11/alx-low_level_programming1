@@ -1,35 +1,36 @@
 #include "main.h"
 #include <stdio.h>
 
-char *strcopy(char *dest, char *src)
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+
+char *cap_string(char *str)
 {
-    char temp[50];
-    int i, j;
+        int i, j;
+        char arr[] = {' ','     ', '\n', ',', ';', '.', '!', '?', '"', '(', ')', '{', '}'};
 
-    for (i = 0; src[i] != '\0'; i++)
-    {
+        for (i = 0; arr[i] != '\0'; i++)
+        {
+        }
+
+        for (j = 0; j != '\0'; j++)
+        {
+                
+        }
         
-    }
-
-    for (j = 0; dest[j] != '\0'; j++)
-    {
-        src[i] = dest[j];
-    }
-
-    return src;
-    
+        
 }
 
 int main(void)
 {
-    char s1[30] = "Hello World";
+    char str[] = "Expect the best. Prepare for the worst. Capitalize on what comes.\nhello world! hello-world 0123456hello world\thello world.hello world\n";
     char *ptr;
 
-    ptr = strcopy(s1, "How are you\n");
-
+    ptr = cap_string(str);
     printf("%s", ptr);
-
-
-
+    printf("%s", str);
     return (0);
 }
