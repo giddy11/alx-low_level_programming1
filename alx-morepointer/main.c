@@ -7,48 +7,61 @@
  * Return: Always 0.
  */
 
-char *cap_string(char *str)
+char *rot13(char *str)
 {
-        int i, k, j, cap_next;
-        cap_next = 1;
-        // char arr[] = {32,9, 10, 44, 59, 46, 33, 63, 34, 40, 41, 123, 125};
-        char arr[] = {' ', '.'};
-        k = 0;
+    char first_letters[] = {65,66,67,68,69,70,71,72,73,74,75,76,
+                            77,78,79,80,81,82,83,84,85,86,87,88,
+                            89,90,97,98,99,100,101,102,103,104,
+                            105,106,107,108,109,110,111,112,113,
+                            114,115,116,117,118,119,120,121,122};
+                            
+    char second_letters[] = {78,79,80,81,82,83,84,85,86,87,88,89,
+                            90,65,66,67,68,69,70,71,72,73,74,75,
+                            76,77,110,111,112,113,114,115,116,117,
+                            118,119,120,121,122,97,98,99,100,101,
+                            102,103,104,105,106,107,108,109};
 
-        while (str[k] != '\0')
-        {
-            k++;
-        }
-        
+    int i, j, k;
+    i = 0;
 
-        for (i = 0; i < k ; i++)
+    while (str[i])
+    {
+        for (j = 65, k = 97; j < 91 && k < 122; i++)
         {
-            if (str[i] >= 97 && str[i] <= 122) 
+            if (str[i] == first_letters[j])
             {
-                    // str[i] = str[i] - 32;
-                        for (j = 0; arr[j] != '\0'; j++)
-                        {
-                            if (arr[j] == str[i])
-                                {
-                                        str[i+1] = str[i+1] - 32;
-                                }
-                        }
+                str[i] = first_letters[j + 13];
+                break;
             }
             
         }
-
-        return str;
+        
+    }
+    return str;
+    
 }
 
 int main(void)
 {
-    // char str[] = "Expect the best. Prepare for the worst. Capitalize on what comes.\nhello world! hello-world 0123456hello world\thello world.hello world\n";
-    char str[] = "yes i. love you, so much.";
-    char *ptr;
+    // char s[] = "ROT13 (\"rotate by 13 places\", sometimes hyphenated ROT-13) is a simple letter substitution cipher.\n";
+    char s[] = "ROT13 (\"rotate";
 
-    ptr = cap_string(str);
-    printf("%s", ptr);
-    // printf("%s", str);
+    char *p;
+
+    p = rot13(s);
+    printf("%s", p);
+    // printf("------------------------------------\n");
+    // printf("%s", s);
+    // printf("------------------------------------\n");
+    // p = rot13(s);
+    // printf("%s", p);
+    // printf("------------------------------------\n");
+    // printf("%s", s);
+    // printf("------------------------------------\n");
+    // p = rot13(s);
+    // printf("%s", p);
+    // printf("------------------------------------\n");
+    // printf("%s", s);
 
 
     return (0);
