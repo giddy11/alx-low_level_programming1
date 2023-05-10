@@ -17,7 +17,7 @@
 int main()
 {
     int num, q, rem, res, fact;
-    num = 145;
+    num = 678;
     q = num;
     res = 0;
     fact = 1;
@@ -35,10 +35,10 @@ int main()
     }
 
     if(res == num)
-        printf("This is an Strong Number");
+        printf("This is an Strong Number\n");
     
     else
-        printf("Not");
+        printf("Not\n");
 
     return (0);
 }
