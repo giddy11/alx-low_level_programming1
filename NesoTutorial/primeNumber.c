@@ -24,6 +24,8 @@
  *      Divide that number by numbers less than or equal to the square root of the number
  *      If it is divisible by any of the numbers, then we can say that the number isnt a prime number
  *      Else it is a prime number
+ * 
+ * Ceil: this function returns a smallest interger greater than or equal to x
 */
 
 int main()
@@ -35,8 +37,8 @@ int main()
 
     if(num > 1)
     {
-        sqrtNum = sqrt(num);
-        divisor = sqrtNum;
+        sqrtNum = ceil(sqrt(num));
+        divisor = 2;
 
         while(divisor <= sqrtNum)
         {

@@ -25,7 +25,7 @@
 int main()
 {
 
-    int number = 2332, q = number, rem;
+    int number = 1001, q = number, rem;
     int result = 0;
 
     while(q != 0)

@@ -2,17 +2,6 @@
 
 // What is the output of the following 
 
-/**
- * 
-*/
-
-/***
- * d = 
- * c = 
- * b = 
- * a = 1
-*/
-
 int main()
 {
     int a = 1;
