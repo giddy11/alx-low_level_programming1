@@ -27,5 +27,5 @@ int main()
     };
     print_chessboard(board);
 
-    return (0);
+    return (0); 
 }
