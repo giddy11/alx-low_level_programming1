@@ -2,24 +2,18 @@
 
 void set_string(char **s, char *to)
 {
-    int i, j;
-
-    for (i = 0; s[i] != 0; i++)
-    {
-        printf("%s", s[i]);
-    }
+    *s = to;
 }
 
 int main()
 {
-    // char *s0 = "Bob Dylan";
-    // char *s1 = "Robert Allen";
     char *s0 = "Bob";
-    char *s1 = "Robert";
+    // char *s1 = "Robert";
+    char *s2 = NULL;
 
     // printf("%s, %s\n", s0, s1);
-    set_string(&s1, s0);
-    printf("%s, %s\n", s0, s1);
+    set_string(&s0, s2);
+    printf("%s, %s\n", s0, s2);
     return (0);
 
     return (0);
