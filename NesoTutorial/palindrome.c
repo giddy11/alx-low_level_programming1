@@ -36,10 +36,10 @@ int main()
     }
 
     if(result == number)
-        printf("This is a palindrom");
+        printf("This is a palindrome");
     
     else
-        printf("This is not a palindrom");
+        printf("This is not a palindrome");
 
     return (0);
 }
