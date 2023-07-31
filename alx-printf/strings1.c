@@ -4,5 +4,5 @@
 int main()
 {
     printf("||%0d||", 17);
-    return (0);
+    return (0); 
 }
