@@ -1,19 +1,18 @@
 #include <stdio.h>
 
 
-int print(int nb)
+int add(int n)
 {
-    if (nb < 0) 
+    if (n == 0) 
     {
         return (0);
     }
-    printf("%d", nb + print(nb - 1));
-    nb --;
-    return (nb);
+    return n + add(n - 1);
 }
 
 int main(void)
 {
-    print(4);
+    int a = add(5);
+    printf("%d\n", a);
     return (0);
 }
