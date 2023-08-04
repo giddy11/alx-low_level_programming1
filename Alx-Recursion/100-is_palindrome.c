@@ -2,7 +2,7 @@
 
 int _strlen_recursion(char *s)
 {
-	if (*s == '\0')
+	if (*s == 0)
 		return (0);
 	else
 		return (1 + _strlen_recursion(s + 1));
@@ -40,8 +40,9 @@ int Compare_Odd(char *s, int div1, int div2, int count)
 
 int is_palindrome(char *s)
 {
-    int length = _strlen_recursion(s);
-    int div, div1, div2, count;
+    // int length = _strlen_recursion(s);
+    int div, div1, div2, count, length;
+    length = _strlen_recursion(s);
     div = (length / 2);
     div1 = div;
     div2 = div;
@@ -54,11 +55,11 @@ int is_palindrome(char *s)
         div1 = div = div2;
         return Compare_Even(s, div1, div2, count);
     }
-    else if (length % 2 == 1)
+    else
     {
         div1 = div - 1;
         div2 = div + 1;
-        Compare_Odd(s, div1, div2, count);
+        return Compare_Odd(s, div1, div2, count);
     }
 }
 
@@ -66,7 +67,7 @@ int main(void)
 {
     int r;
 
-    r = is_palindrome("");
+    r = is_palindrome("level");
     printf("%d\n", r);
     r = is_palindrome("redder");
     printf("%d\n", r);

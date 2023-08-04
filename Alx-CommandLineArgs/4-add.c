@@ -13,7 +13,8 @@ int main(int argc, char *argv[])
         for (i = 1; i < argc; i++)
         {
             char *e = argv[i];
-            for (j = 1; e[j] != 0; j++)
+            int start_index = (*e == '-' || *e == '+') ? 1 : 0;
+            for (j = start_index; e[j] != 0; j++)
             {
                 if (e[j] < 48 || e[j] > 57)
                 {
