@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * what is the size of the array for the size instead of guessing
+ * strlen to get the length of the string
+ * copy the string to the allocated space in the heap
+ * free the memory
+*/
+
 int _strlen(char *s)
 {
 	int i;
@@ -42,10 +49,6 @@ char *_strdup(char* str)
 
     return (ptr);
 }
-
-#include <stdio.h>
-#include <stdlib.h>
-
 
 int main(void)
 {

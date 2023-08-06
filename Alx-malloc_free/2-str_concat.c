@@ -1,6 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+/**
+ * check if null and treat as empty string
+ * Get the length of the 2 strings (using strlen function)
+ * add both length together and store in a variable called total
+ * create a pointer to the heap that has the total length including
+ * 1 additional byte for null termination
+ * return NULL if the pointer in the heap returned a failure
+ * copy string1 to the pointer in the heap (strcpy function)
+ * concatenate string2 to the pointer in the heap (strcat function)
+ * return pointer
+*/
+
 int _strlen(char *s)
 {
     int i;

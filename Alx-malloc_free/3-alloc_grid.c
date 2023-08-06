@@ -6,10 +6,14 @@ int **alloc_grid(int width, int height)
     if (width <= 0 || height <= 0)
         return NULL;  // Invalid dimensions, return NULL
 
+    /**
+     * This uses the malloc function to dynamically allocate memory for the array of 
+     * pointers (rows or 1D) in the two-dimensional array. 
+     **/    
     int **grid = malloc(height * sizeof(int *));
 
     if (grid == NULL)
-        return NULL;  // Memory allocation failed, return NULL
+        return NULL;  // Memory allocation failed, return NULL or insufficient memory
 
     for (int i = 0; i < height; i++)
     {
@@ -20,9 +24,9 @@ int **alloc_grid(int width, int height)
             // Memory allocation failed, free previously allocated memory and return NULL
             for (int j = 0; j < i; j++)
             {
-                free(grid[j]);
+                free(grid[j]); // free the columns
             }
-            free(grid);
+            free(grid); // free the rows
             return NULL;
         }
 
@@ -38,14 +42,17 @@ int **alloc_grid(int width, int height)
 
 int main(void)
 {
-    int width = 14;
-    int height = 13;
+    int width = 6;
+    int height = 4;
 
     int **grid = alloc_grid(width, height);
     if (grid == NULL) {
         printf("Memory allocation failed.\n");
         return 1;
     }
+
+    grid[0][3] = 98;
+    grid[3][4] = 402;
 
     // Print the grid
     for (int i = 0; i < height; i++) {
@@ -54,6 +61,8 @@ int main(void)
         }
         printf("\n");
     }
+
+    
 
     // Free the allocated memory
     for (int i = 0; i < height; i++) {

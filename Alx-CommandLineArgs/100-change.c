@@ -3,7 +3,10 @@
 
 int calculateMinCoins(int cents)
 {
-    int coins[] = {25, 10, 5, 2, 1};
+    // int coins[] = {25, 5, 10, 1, 2};
+        int coins[] = {30, 25, 5, 10, 1, 2};
+
+
     int numCoins = sizeof(coins) / sizeof(coins[0]);
     int count = 0;
     int i;
