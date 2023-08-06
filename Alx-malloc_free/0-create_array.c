@@ -5,7 +5,7 @@ char *create_array(unsigned int size, char c)
 {
     unsigned int i;
     char* ptr = malloc((size + 1) * sizeof(char));
-    printf("%p", ptr);
+    // printf("%p", ptr);
 
     if (size == 0)
         return (NULL);
@@ -55,7 +55,7 @@ void simple_print_buffer(char *buffer, unsigned int size)
 int main(void)
 {
     char *buffer;
-    int size = 98;
+    int size = 1;
     char c = 'H';
 
     buffer = create_array(size, c);
@@ -64,7 +64,7 @@ int main(void)
         printf("failed to allocate memory\n");
         return (1);
     }
-    simple_print_buffer(buffer, 98);
+    simple_print_buffer(buffer, 1);
     free(buffer);
     return (0);
 }
