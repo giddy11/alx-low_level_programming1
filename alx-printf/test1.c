@@ -9,7 +9,7 @@ int main()
     char ***ptr1 = &ptr;
 
 
-    printf("s: %p\n", s);
+    printf("s: %p\n", s); 
     printf("ptr: %p\n\n", *ptr);
     printf("ptr1: %p\n\n", *ptr);
 

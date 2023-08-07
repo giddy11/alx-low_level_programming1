@@ -2,7 +2,7 @@ Checking for NULL after memory allocation is a common practice in C programming,
 
 Memory Allocation Failure: Dynamic memory allocation functions (malloc, calloc, etc.) allocate memory from the heap. If there is not enough available memory to satisfy the allocation request, these functions return a NULL pointer to indicate that the allocation has failed.
 
-Prevent Segmentation Faults: Attempting to dereference a NULL pointer (accessing the memory it points to) can lead to a segmentation fault or crash, as it's an attempt to access memory that the program doesn't have permission to access.
+Prevent Segmentation Faults: Attempting to dereference a NULL pointer (accessing the me mory it points to) can lead to a segmentation fault or crash, as it's an attempt to access memory that the program doesn't have permission to access.
 
 Graceful Error Handling: Checking for NULL allows your program to gracefully handle cases where memory allocation fails. Instead of the program crashing unexpectedly, you can provide appropriate error messages or take alternative actions to handle the failure.
 

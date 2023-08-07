@@ -42,7 +42,7 @@ int **alloc_grid(int width, int height)
 
 int main(void)
 {
-    int width = 6;
+    int width = 6; 
     int height = 4;
 
     int **grid = alloc_grid(width, height);

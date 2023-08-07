@@ -70,7 +70,7 @@ char *str_concat(char *s1, char *s2)
 
     char *ptr = malloc((total_len + 1) * sizeof(char));
 
-    if (ptr == NULL)
+    if (ptr == NULL) 
         return NULL;
 
     _strcpy(ptr, s1);
@@ -80,7 +80,7 @@ char *str_concat(char *s1, char *s2)
 }
 
 int main(void)
-{
+{ 
     char *s;
 
     s = str_concat(NULL, "Holberton");

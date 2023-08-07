@@ -5,7 +5,7 @@ char* f(void)
 {
     char *str = "Hello world";
 
-    return (str);
+    return (str); 
 }
 
 int main()
