@@ -6,7 +6,7 @@ Prevent Segmentation Faults: Attempting to dereference a NULL pointer (accessing
 
 Graceful Error Handling: Checking for NULL allows your program to gracefully handle cases where memory allocation fails. Instead of the program crashing unexpectedly, you can provide appropriate error messages or take alternative actions to handle the failure.
 
-
+ 
 ******************************************************************************************
 please can someone explain to me the difference between
 int **grid = malloc(height * sizeof(int ));    {What is the size for int* alone}
