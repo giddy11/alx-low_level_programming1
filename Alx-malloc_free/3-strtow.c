@@ -144,7 +144,8 @@ int main(void)
 {
     char **tab;
 
-    tab = strtow("ALX  Sch  #cis  ");
+    tab = strtow("ALX is fun");
+    // tab = strtow("Please Hello");
     if (tab == NULL)
     {
         printf("Failed\n");

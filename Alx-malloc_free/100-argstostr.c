@@ -18,9 +18,9 @@ int calculate_total_chars(int ac, char **av)
 		for (j = 0; av[i][j] != 0; j++)
 			total_chars++;
 
-		total_chars++;
+		total_chars++; //new line
 	}
-	total_chars++;
+	total_chars++; // null terminator
 
 	return (total_chars);
 }
