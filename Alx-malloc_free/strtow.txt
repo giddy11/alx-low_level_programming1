@@ -1,0 +1,66 @@
+1. Declare an array of array variable row, that will be used to store each
+1D array in the heap.
+
+2. Declare a pointer address that will store a new one found and assign it
+to the first row.
+
+3. initialise a variable for row_index that represents each row in the heap
+memory. it has an initial value of 0 which is the first row.
+
+4. Declare a variable words that will be the number of words in the array.
+the number of words will be the size of the memory in the heap for the 
+row. if no word is found, return null.
+
+5. Declare a variable start_word that marks the beginning of the word.
+
+6. Declare a variable end_word that marks the end of the word from the
+above.
+
+7. initialize a variable for str_len that will be used to loop through the
+string array after getting the length of the string.
+
+8. initialize the row to a memory in the heap using the length of words as
+size to allocate for the array of array.
+
+9. return null if theres memory failure.
+
+10. use a for loop to loop through the string array
+
+11. in the loop, check if a word is found and increments the found_word variable
+still you encounter a space which will mark the end of the word
+    a.the start_word will be assigned the current index of the iteration
+
+    b.when a space is found, assigned the current index of the iteration to 
+    the variable end_word which marks the end of the word.
+
+    c.check that a word was found (found_word not 0)
+
+    d.initiate the pointer ptr to a memory in the heap that will allocate
+    the word found to an address.
+
+    e.check for memory failure and return null if there is.
+
+    f.assign the first row index of the row to the ptr which has value of
+    the word stored.
+
+    g.increment the row_index to the next index to store next word and
+    initialize the found_word variable to 0 which will continue the loop
+    operation in search of another word. (from 11 above)
+
+
+
+tab = strtow("ALX Sch #cis");
+str_len == 12
+i = 3
+
+"p   l   e   a   s   e       H   e   l   l   o"
+ 0   1   2   3   4   6  7    8   9   10  11  12
+
+
+
+
+start_word=i
+i = 0
+
+end_word = i
+i = 7

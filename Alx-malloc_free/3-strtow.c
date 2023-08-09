@@ -7,63 +7,63 @@
  *
  * Return: number of words
  */
-int count_word(char *s)
+int count_word(char *str)
 {
-    int flag, c, w;
+    int is_word, i, word_count;
 
-    flag = 0;
-    w = 0;
+    is_word = 0;
+    word_count = 0;
 
-    for (c = 0; s[c] != '\0'; c++)
+    for (i = 0; str[i] != '\0'; i++)
     {
-        if (s[c] == ' ')
-            flag = 0;
-        else if (flag == 0)
+        if (str[i] == ' ')
+            is_word = 0;
+        else if (is_word == 0)
         {
-            flag = 1;
-            w++;
+            is_word = 1;
+            word_count++;
         }
     }
 
-    return w;
+    return word_count;
 }
 
 /**
  * allocate_and_copy - allocate memory and copy a substring
- * @start: start position
- * @end: end position
+ * @start_word: start position
+ * @end_word: end position
  * @str: source string
  *
  * Return: pointer to the new substring
  */
-char *allocate_and_copy(int start, int end, char *str)
+char *allocate_and_copy(int start_word, int end_word, char *str)
 {
-    int len = end - start;
-    char *substr = (char *)malloc(sizeof(char) * (len + 1));
+    int len = end_word - start_word;
+    char *col = (char *)malloc(sizeof(char) * (len + 1));
 
-    if (substr == NULL)
+    if (col == NULL)
         return NULL;
 
     for (int i = 0; i < len; i++)
     {
-        substr[i] = str[start + i];
+        col[i] = str[start_word + i];
     }
-    substr[len] = '\0';
+    col[len] = '\0';
 
-    return substr;
+    return col;
 }
 
 /**
- * free_matrix - free memory allocated for a matrix of strings
- * @matrix: pointer to the matrix
+ * free_row - free memory allocated for a row of strings
+ * @row: pointer to the row
  */
-void free_matrix(char **matrix)
+void free_row(char **row)
 {
-    for (int i = 0; matrix[i] != NULL; i++)
+    for (int i = 0; row[i] != NULL; i++)
     {
-        free(matrix[i]);
+        free(row[i]);
     }
-    free(matrix);
+    free(row);
 }
 
 /**
@@ -75,46 +75,48 @@ void free_matrix(char **matrix)
  */
 char **strtow(char *str)
 {
-    char **matrix, *tmp;
-    int i, k = 0, len = 0, words, c = 0, start, end;
+    char **row, *ptr;
+    int i, row_index = 0, str_len = 0, words, found_word = 0, start_word, end_word;
 
-    while (*(str + len))
-        len++;
+    while (str[str_len])
+        str_len++;
+
     words = count_word(str);
+
     if (words == 0)
         return NULL;
 
-    matrix = (char **)malloc(sizeof(char *) * (words + 1));
-    if (matrix == NULL)
+    row = malloc((words + 1) * sizeof(char *));
+
+    if (row == NULL)
         return NULL;
 
-    for (i = 0; i <= len; i++)
+    for (i = 0; i <= str_len; i++)
     {
         if (str[i] == ' ' || str[i] == '\0')
         {
-            if (c)
+            if (found_word)
             {
-                end = i;
-                tmp = allocate_and_copy(start, end, str);
-                if (tmp == NULL)
+                end_word = i;
+                ptr = allocate_and_copy(start_word, end_word, str);
+                if (ptr == NULL)
                 {
-                    free_matrix(matrix);
+                    free_row(row);
                     return NULL;
                 }
-                matrix[k] = tmp;
-                k++;
-                c = 0;
+                row[row_index] = ptr;
+                row_index++;
+                found_word = 0;
             }
         }
-        else if (c++ == 0)
-            start = i;
+        else if (found_word++ == 0)
+            start_word = i;
     }
 
-    matrix[k] = NULL;
+    row[row_index] = NULL;
 
-    return matrix;
+    return row;
 }
-
 
 /**
  * print_tab - Prints an array of string
@@ -130,6 +132,7 @@ void print_tab(char **tab)
     {
         printf("%s\n", tab[i]);
     }
+
 }
 
 /**
@@ -141,12 +144,14 @@ int main(void)
 {
     char **tab;
 
-    tab = strtow(" ALX Sch #cis");
+    tab = strtow("ALX  Sch  #cis  ");
     if (tab == NULL)
     {
         printf("Failed\n");
         return (1);
     }
     print_tab(tab);
+
+    // free_row(tab);
     return (0);
 }
