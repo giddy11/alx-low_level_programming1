@@ -1,100 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * _strlen -  function that returns the length of a string
+ *
+ * @s: char type pointer
+ *
+ * Return: string length of a string
+ */
 int _strlen(char *s)
 {
-    int i;
-    for (i = 0; s[i] != '\0'; i++)
-    {
-    }
-    return i;
-}
+	int i;
 
-char *_strcpy(char *dest, char *src)
-{
-    int i;
-
-    i = 0;
-
-    while (src[i] != '\0')
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-
-    return dest;
-}
-
-char *_strcat(char *dest, char *src)
-{
-    int i, j;
-
-    for (i = 0; dest[i] != '\0'; i++)
-    {
-    }
-
-    for (j = 0; src[j] != '\0'; j++, i++)
-    {
-        dest[i] = src[j];
-    }
-
-    dest[i] = '\0';
-
-    return dest;
-}
-
-char *_strncat(char *dest, char *src, int n)
-{
-	int i, j;
-
-	for (i = 0; dest[i] != '\0'; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
 	}
 
-	for (j = 0; src[j] != '\0' && n > 0; j++)
-	{
-		dest[i] = src[j];
-		n--;
-		i++;
-	}
-
-	return (dest);
+	return (i);
 }
+
+
+/**
+ * string_nconcat - a function that concatenates two strings.
+ * @s1: first string
+ * @s2: second string
+ * @n: number of bytes
+ * Return: a pointer char
+ */
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-    if (s1 == NULL)
-        s1 = "";
-    if (s2 == NULL)
-        s2 = "";
+	char *ptr;
+	unsigned int len1 = 0, len2 = 0, i, j;
 
-    int length1 = _strlen(s1);
-    int length2 = _strlen(s2);
-    int total_length = length1 + length2;
+	if (s1 == NULL)
+		s1 = "";
 
-    if (n >= length2)
-    {
-        char *ptr = malloc(total_length * sizeof(char));
+	if (s2 == NULL)
+		s2 = "";
 
-        _strcpy(ptr, s1);
-        _strcat(ptr, s2);
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
 
-        return ptr;
-    }
-    else
-    {
-        char *ptr = malloc((length1 + n) * sizeof(char));
+	n = (n > len2) ? len2 : n;
 
-        _strcpy(ptr, s1);
-        _strncat(ptr, s2, n);
+	ptr = malloc((len1 + n + 1) * sizeof(char));
 
-        return ptr;
+	for (i = 0; i < len1; i++)
+	{
+		ptr[i] = s1[i];
+	}
 
+	for (j = 0; j < n; j++, i++)
+	{
+		ptr[i] = s2[j];
+	}
+	ptr[i] = '\0';
 
-    }
-
-
+	return (ptr);
 }
 
 
@@ -102,7 +65,7 @@ int main()
 {
     char *concat;
     
-    concat = string_nconcat("Best ", "School yes!!", 55);
+    concat = string_nconcat("Best ", "School !!!", 30);
 
     printf("%s\n", concat);
 
