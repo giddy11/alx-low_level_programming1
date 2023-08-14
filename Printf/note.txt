@@ -1,0 +1,3 @@
+gcc -c *.c
+ ar rcs lib.a *.o
+gcc main.c -L. lib.a
