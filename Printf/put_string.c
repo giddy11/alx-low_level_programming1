@@ -9,7 +9,6 @@ int put_string(char *str)
         {
             my_putchar(str[i]);
         }
-        str[i] = 0;
     }
     
 

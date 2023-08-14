@@ -9,6 +9,7 @@
 int my_putchar(char c);
 int my_printf(const char *format, ...);
 int put_string(char *string);
+int print_int(int interger);
 
 
 
