@@ -10,6 +10,7 @@ int put_string(char *str)
             my_putchar(str[i]);
         }
     }
+    // my_putchar('\n');
     
 
     return r_value;
