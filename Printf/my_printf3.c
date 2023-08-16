@@ -25,11 +25,15 @@ int _printf(const char *format, ...)
     va_list my_list;
     va_start(my_list, format);
 
-    for (i = 0; format[i] != 0; i++, r_value++)
+    for (i = 0; format[i] != 0; i++)
     {
-		if (*format == '%')
-			r_value += print_format(*(++format), my_list);
+		if (format[i] == '%')
+        {
+            r_value--; 
+			r_value += print_format(format[i+1], my_list);
+            i++;
 
+        }
 		else
 			r_value += my_putchar(format[i]);
     }
