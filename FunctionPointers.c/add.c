@@ -6,12 +6,17 @@ void PrintHello(char *name)
     printf("Hello %s\n", name); 
 }
 
+int print_char(va_list c)
+{
+
+}
+
 int main()
 {
     void (*ptr)(char*) = PrintHello;
     ptr("Gideon");
 
-
+    int (*handler_func)(va_list arg) = print_char;
 
 
     /*int (*func)(int, int) = Add;
