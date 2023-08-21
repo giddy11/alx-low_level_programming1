@@ -1,4 +1,4 @@
-/*Write a function that produces output according to a format specifier 'c' enhancement*/
+/*Write a function that produces output according to a format specifier d, s and % enhancement*/
 
 #include <stdarg.h>
 #include <stdlib.h>
@@ -8,6 +8,8 @@
 
 #define BUF_CAPACITY 1024
 #define BUF_CLEARING -1
+
+#define EMPTY_STRING "(null)"
 
 
 typedef struct
@@ -61,11 +63,85 @@ int print_char(va_list arg)
 	return (r_value);
 }
 
+int print_int(va_list i)
+{
+    int n = va_arg(i, int);
+    int count = 0, divisor = 1;
+
+    if (n == INT_MIN)
+    {
+        char min_str[] = "-2147483648";
+        for (int i = 0; min_str[i] != '\0'; i++)
+        {
+            _putchar(min_str[i]);
+            count++;
+        }
+        return count;
+    }
+    else if (n < 0)
+    {
+        _putchar('-');
+        count++;
+        n = -n;
+    }
+
+    if (n == 0)
+    {
+        _putchar('0');
+        count++;
+        return count;
+    }
+
+    /* Find the divisor that gives the first digit of n */
+    while (n / divisor >= 10)
+    {
+        divisor *= 10;
+    }
+
+    /* Print each digit of n */
+    while (divisor != 0)
+    {
+        _putchar('0' + (n / divisor));
+        count++;
+        n %= divisor;
+        divisor /= 10;
+    }
+
+    return count;
+}
+
+int print_string(va_list str)
+{
+    int i, r_value = 0;
+    char *strn;
+
+    strn = va_arg(str, char*);
+    if (strn == NULL)
+        strn = EMPTY_STRING;
+
+    for (i = 0; strn[i]; i++, r_value++)
+    {
+        _putchar(strn[i]);
+    }
+
+    return r_value;
+}
+
+int print_percent(va_list arg)
+{
+	(void)arg;
+	return (_putchar('%'));
+}
+
 int (*find_format_handlers(char *format))(va_list arg)
 {
     unsigned int i = 0;
     format_handler find_func[] = {
         {"c", print_char},
+        {"d", print_int},
+        {"i", print_int},
+        {"s", print_string},
+        {"%", print_percent},
         {NULL, NULL}
 
     };
@@ -113,7 +189,7 @@ int _printf(const char *format, ...)
     va_start(args, format);
 
     if (format == NULL || (format[0] == '%' && !format[1]))
-        return (-1);
+        return -1;
 
     for(ptr; *ptr; ptr++)
     {
@@ -144,8 +220,8 @@ int _printf(const char *format, ...)
 int main(void)
 {
 
-    printf("Hello %c Giddy.\n", 'G');
-    _printf("Hello %c Giddy.\n", 'G');
+    printf("He %% Giddy.\n");
+    _printf("He %% Giddy.\n");
 
 
 	return (0);
