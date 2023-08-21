@@ -35,7 +35,7 @@ typedef struct
 
 } format_handler;
 
-int _putchar(int c)
+int _putchar(int c) 
 {
     static int i;
     static char buf[BUF_CAPACITY];
