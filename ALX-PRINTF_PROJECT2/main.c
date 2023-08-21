@@ -10,6 +10,9 @@
 
 #define EMPTY_STRING "(null)"
 
+#define HEX_LOWERCASE	1
+#define SIGN_FLAG       2
+
 
 typedef struct
 {
@@ -27,7 +30,7 @@ typedef struct
 	unsigned int lModifier     : 1;
 } Params; // params_t
 
-#define DEFAULT_PARAMETERS {0, 0, 0, 0, 0, 0, 0, 0, 0, 0} // INITIAL_PA
+#define DEFAULT_PARAMETERS {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 
 typedef struct specifier
@@ -54,6 +57,150 @@ int _putchar(int c)
     return 1;
 }
 
+/*Overall, this function converts a number into a string representation in the specified base, considering sign and case options. It builds the string in reverse order and returns a pointer to the beginning of the string.*/
+char *convert(long int num, int base, int flags, Params *params)
+{
+	static char *array;
+	static char buffer[50];
+	char sign = 0;
+	char *ptr;
+	unsigned long n = num;
+	(void)params;
+
+	if (!(flags & SIGN_FLAG) && num < 0)
+	{
+		n = -num;
+		sign = '-';
+
+	}
+
+    if (flags & HEX_LOWERCASE)
+        array = "0123456789abcdef";
+    else
+        array = "0123456789ABCDEF";
+
+	ptr = &buffer[sizeof(buffer) - 1];
+	*ptr = '\0';
+
+    for (; n != 0; n /= base)
+        *(--ptr) = array[n % base];
+
+	if (sign)
+		*--ptr = sign;
+	return (ptr);
+}
+
+int print_int(va_list i, Params *params)
+{
+    int n = va_arg(i, int);
+    int count = 0, divisor = 1;
+    (void)params;
+
+    if (n == INT_MIN)
+    {
+        char min_str[] = "-2147483648";
+        for (int i = 0; min_str[i] != '\0'; i++)
+        {
+            _putchar(min_str[i]);
+            count++;
+        }
+        return count;
+    }
+    else if (n < 0)
+    {
+        _putchar('-');
+        count++;
+        n = -n;
+    }
+
+    if (n == 0)
+    {
+        _putchar('0');
+        count++;
+        return count;
+    }
+
+    /* Find the divisor that gives the first digit of n */
+    while (n / divisor >= 10)
+    {
+        divisor *= 10;
+    }
+
+    /* Print each digit of n */
+    while (divisor != 0)
+    {
+        _putchar('0' + (n / divisor));
+        count++;
+        n %= divisor;
+        divisor /= 10;
+    }
+
+    return count;
+}
+
+int _puts(char *str)
+{
+	char *a = str;
+
+	while (*str)
+		_putchar(*str++);
+	return (str - a);
+}
+
+int print_string(va_list str, Params *params)
+{
+    int i, r_value = 0;
+    char *strn;
+    (void)params;
+
+    strn = va_arg(str, char*);
+    if (strn == NULL)
+        strn = EMPTY_STRING;
+
+    for (i = 0; strn[i]; i++, r_value++)
+    {
+        _putchar(strn[i]);
+    }
+
+    return r_value;
+}
+
+int print_S(va_list arg, Params *params)
+{
+	char *str = va_arg(arg, char *);
+	char *hex;
+	int r_value = 0;
+
+	if ((int)(!str))
+		return (_puts(EMPTY_STRING));
+	for (; *str; str++)
+	{
+		if ((*str > 0 && *str < 32) || *str >= 127)
+		{
+			r_value += _putchar('\\');
+			r_value += _putchar('x');
+			hex = convert(*str, 16, 0, params);
+			if (!hex[1])
+				r_value += _putchar('0');
+			r_value += _puts(hex);
+		}
+		else
+		{
+			r_value += _putchar(*str);
+		}
+	}
+	return (r_value);
+}
+
+
+
+int print_percent(va_list arg, Params *params)
+{
+	(void)arg;
+    (void)params;
+	return (_putchar('%'));
+}
+
 int print_char(va_list arg, Params *params)
 {
 	char pad_char = ' ';
@@ -65,7 +212,7 @@ int print_char(va_list arg, Params *params)
 	while (pad++ < params->width)
 		r_value += _putchar(pad_char);
 
-	if (params->minusFlag != NULL)
+	if (!params->minusFlag)
 		r_value += _putchar(ch);
 
 	return (r_value);
@@ -76,10 +223,11 @@ int (*find_format_handlers(char *format))(va_list arg, Params *Params)
     unsigned int i = 0;
     format_handler find_func[] = {
         {"c", print_char},
-        // {"c", print_char},
-        // {"d", print_int},
-        // {"i", print_int},
-        // {"b", print_bin},
+        {"d", print_int},
+        {"i", print_int},
+        {"s", print_string},
+        {"S", print_S},
+        {"%", print_percent},
         {NULL, NULL}
 
     };
@@ -269,13 +417,13 @@ int _printf(const char *format, ...)
         if (get_modifier(ptr, &params))
 			ptr++;
 
-        if (find_format_handlers(ptr) != NULL)
+        if (find_format_handlers(ptr))
         {
-            r_value += print_from_to(specifier_start, ptr, params.lModifier || 
-                                        params.hModifier ? ptr - 1 : 0);
+            r_value += execute_func(ptr, args, &params);
         }
         else
-            r_value += execute_func(ptr, args, &params);
+            r_value += print_from_to(specifier_start, ptr, params.lModifier || 
+                                        params.hModifier ? ptr - 1 : 0);
     }
     _putchar(BUF_CLEARING);
     va_end(args);
@@ -302,9 +450,8 @@ int main(void)
     num1 = 0;
     num2 = 0;
 
-    printf("Hello\n");
-    _printf("Hello\n");
-
+    //  _printf("%S\n", "Best\nSchool");
+      _printf("%S\n", "Best\nSchool");
 
 	return (0);
 }
