@@ -4,11 +4,7 @@
 
 int main ()
 {
-   char b = 'c';
-
-   int res = check(b);
-
-    printf("%d", res);
+   printf("i am % a boy called ");
 
     return (0);
 }

@@ -1,21 +1,28 @@
 #include <stdio.h>
-// #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+
+int _putchar(char c)
+{
+    static char buffer[1024]
+    static int i;
+
+    if (c == -1 || i >= 1024)
+    {
+        write(1, &buffer, i);
+        i = 0;
+    }
+
+
+    return (1);
+}
+
+
+
+
 
 
 int main(void)
 {
-    char *s;
-    int *ptr;
-    *ptr = 98;
-
-    s = (char *) malloc(100);
-
-    // strcpy(s, "Best School");
-
-    // // printf("%s", s);
-    // printf("%d", *ptr);
-
-
-    return (0);
+   
 }
