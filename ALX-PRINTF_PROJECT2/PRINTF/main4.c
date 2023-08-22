@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <limits.h>
 
-#define BUF_CAPACITY 1024
+#define BUF_CAPACITY 8
 #define BUF_CLEARING -1
 
 #define EMPTY_STRING "(null)"
@@ -49,8 +49,8 @@ int print_char(va_list arg)
 
 char *convert(long int num, int base)
 {
-	static char *array;
-	static char buffer[20];
+	 char *array;
+	 char buffer[20];
 	char *ptr;
 	unsigned long n = num;
 
@@ -116,7 +116,7 @@ int print_int(va_list i)
         }
         return count;
     }
-    else if (n < 0)
+     if (n < 0)
     {
         _putchar('-');
         count++;
@@ -237,7 +237,7 @@ int _printf(const char *format, ...)
             r_value += _putchar(*ptr);
             continue;
         }
-        specifier_start = ptr;
+        specifier_start = ptr;  // hello sir %c
         ptr++;
 
         if (find_format_handlers(ptr))
@@ -249,7 +249,7 @@ int _printf(const char *format, ...)
             r_value += print_from_to(specifier_start, ptr);
 
     }
-    // _putchar(BUF_CLEARING);
+    _putchar(BUF_CLEARING);
     va_end(args);
 
     return r_value;
@@ -259,9 +259,9 @@ int _printf(const char *format, ...)
 int main(void)
 {
     // _printf("%S\n", "Best\nSchool");
-    _printf("Besttehsty\n");
-    _printf("leavemealon\n");
 
+   
+    printf("%d", 2147483648);
 
 
 
