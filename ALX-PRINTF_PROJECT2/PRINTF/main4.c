@@ -50,14 +50,11 @@ int print_char(va_list arg)
 char *convert(long int num, int base)
 {
 	static char *array;
-	static char buffer[50];
+	static char buffer[20];
 	char *ptr;
 	unsigned long n = num;
 
-    if (HEX_LOWERCASE)
-        array = "0123456789abcdef";
-    else
-        array = "0123456789ABCDEF";
+    array = "0123456789ABCDEF";
 
 	ptr = &buffer[sizeof(buffer) - 1];
 	*ptr = '\0';
@@ -87,7 +84,7 @@ int print_S(va_list arg)
 		return (_puts(EMPTY_STRING));
 	for (; *str; str++)
 	{
-		if ((*str > 0 && *str < 32) || *str >= 127)
+		if (*str >= 127 || (*str > 0 && *str < 32))
 		{
 			r_value += _putchar('\\');
 			r_value += _putchar('x');
@@ -252,7 +249,7 @@ int _printf(const char *format, ...)
             r_value += print_from_to(specifier_start, ptr);
 
     }
-    _putchar(BUF_CLEARING);
+    // _putchar(BUF_CLEARING);
     va_end(args);
 
     return r_value;
@@ -261,7 +258,16 @@ int _printf(const char *format, ...)
 
 int main(void)
 {
-    _printf("%S\n", "Best\nSchool");
+    // _printf("%S\n", "Best\nSchool");
+    _printf("Besttehsty\n");
+    _printf("leavemealon\n");
+
+
+
+
+    // _printf("%c", 9);
+    // printf("%c", 'i');
+
     
     
 
