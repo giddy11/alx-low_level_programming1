@@ -49,19 +49,18 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 
 void free_listint2(listint_t **head)
 {
-    listint_t *temp, *dup;
-    dup = *head;
+    listint_t *temp;
 
-    if (dup == NULL)
+    if (head == NULL)
 		return;
 
-    for (; dup != NULL;)
+    for (; *head != NULL;)
     {
-        temp = (dup)->next;
-        free(dup);
-        dup = temp;
+        temp = (*head)->next;
+        free(*head);
+        *head = temp;
     }
-    *head = NULL;
+    head = NULL;
     
 }
 
