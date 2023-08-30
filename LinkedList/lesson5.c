@@ -21,13 +21,50 @@ int count_of_nodes(node *head)
 
     for(; ptr != NULL; ptr = ptr->link)
     {
-        printf("%d", )
+        printf("[%d]", ptr = ptr->data);
         count++;
     }
 
     return count;
 }
 
+// node *add_at_end(node **head, int data)
+// {
+//     node *ptr, *temp;
+//     ptr = head;
+//     temp = malloc(sizeof(node));
+
+//     temp->data = data;
+//     temp->link = NULL;
+
+//     for (; ptr != NULL; ptr = ptr->link)
+//     {
+//         ;
+//     }
+//     ptr->link = temp;
+
+//     return *head;
+
+// }
+
+void *add_at_end(node **head, int data)
+{
+    node *ptr, *temp;
+    ptr = head;
+    temp = malloc(sizeof(node));
+
+    temp->data = data;
+    temp->link = NULL;
+
+    for (; ptr->link != NULL; ptr = ptr->link)
+    {
+        ;
+    }
+    ptr->link = temp;
+
+    return *head;
+
+}
 
 int main()
 {
@@ -55,6 +92,7 @@ int main()
 
     /*calculate the no of nodes*/
     int res = count_of_nodes(head);
+    add_at_end(head, 67);
 
     printf("%d\n", res);
 
