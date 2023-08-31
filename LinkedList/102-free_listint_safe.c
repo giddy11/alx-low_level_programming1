@@ -36,6 +36,23 @@ listint_t *add_nodeint(listint_t **head, const int n)
     return *head;
 }
 
+
+void free_listint2(listint_t **head)
+{
+    listint_t *temp;
+
+    if (head == NULL)
+		return;
+
+    for (; *head != NULL;)
+    {
+        temp = (*head)->next;
+        free(*head);
+        *head = temp;
+    }
+    head = NULL;    
+}
+
 size_t looped_listint_len(const listint_t *head)
 {
 	const listint_t *tortoise, *hare;
@@ -91,6 +108,36 @@ size_t print_listint_safe(const listint_t *head)
 	return (nodes);
 }
 
+size_t free_listint_safe(listint_t **h)
+{
+	listint_t *temp;
+	size_t nodes, i = 0;
+
+	nodes = looped_listint_len(*h);
+
+	if (nodes == 0)
+	{
+		for (; h != NULL && *h != NULL; nodes++)
+        {
+            temp = (*h)->next;
+            free(*h);
+            *h = temp;
+        }
+	}
+	else
+	{
+		for (i = 0; i < nodes; i++)
+        {
+            temp = (*h)->next;
+            free(*h);
+            *h = temp;
+        }
+        *h = NULL;
+	}
+
+	return (nodes);
+}
+
 
 int main(void)
 {
@@ -118,6 +165,9 @@ int main(void)
     add_nodeint(&head, 402);
     add_nodeint(&head, 1024);
     print_listint_safe(head);
+    free_listint_safe(&head2);
+    free_listint_safe(&head);
+    printf("%p, %p\n", (void *)head2, (void *)head);
     return (0);
 
 }
