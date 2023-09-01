@@ -6,30 +6,27 @@
  * @index: given index
  * Return: the value at index or -1 if an error occured
  */
-int get_bit(unsigned long int n, unsigned int index)
-{
-	if (index >= (sizeof(n) * 8))
-		return (-1);
+// int get_bit(unsigned long int n, unsigned int index)
+// {
+// 	if (index >= (sizeof(n) * 8))
+// 		return (-1);
 
-	return ((n >> index) & 1);
-}
+// 	return ((n >> index) & 1);
+// }
 
 
 
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
 int main(void)
 {
-    int n;
-
-    n = get_bit(1024, 10);
-    printf("%d\n", n);
-    // n = get_bit(98, 0);
-    // printf("%d\n", n);
-    // n = get_bit(1024, 0);
-    // printf("%d\n", n);
+    // print_binary(0);
+    // printf("\n");
+    // print_binary(1);
+    // printf("\n");
+    print_binary(98);
+    printf("\n");
+    print_binary(1024);
+    printf("\n");
+    print_binary((1 << 10) + 1);
+    printf("\n");
     return (0);
 }
