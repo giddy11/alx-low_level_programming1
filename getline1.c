@@ -2,58 +2,96 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
- * tokenize - Entry point
- * Description: tokenizes string
- * @s: string
- * @c: seperator
- * Return: num of tokens
- */
-int tokenize(char *s, char c)
+char *skipDelimiters(char *curr_position, const char *delim)
 {
-	int i, num = 1;
+    // Skip all delimiting characters with the current position
+    while (*curr_position != '\0' && (strchr(delim, *curr_position) != NULL)) {
+        curr_position++;
+    }
+    return curr_position;
+}
 
-	for (i = 0; s[i]; i++)
-	{
+int countWords(char *curr_position, const char *delim) {
+    int found_word = 0;
 
-		if (s[i] == c)
-		{
-			num++;
-			s[i] = '\0';
-		}
-	}
-	return (num);
+    for (; *curr_position != '\0'; curr_position++) {
+        if (strchr(delim, *curr_position) != NULL) {
+            if (found_word)
+                break;
+        } else {
+            found_word = 1;
+        }
+    }
+
+    return found_word;
 }
 
 char *_strtok(char *str, const char *delim)
 {
-    int i;
-    char *s;
+    char *store, *temp;
+    static char *curr_position;
+    int i,  total_len, found_word = 0;
 
-    if (str == NULL)
-        return (NULL);
+    if (str != NULL)
+        curr_position = str;
 
-    for (i = 0; str[i] != 0; i++)
+    if (curr_position == NULL || *curr_position == '\0')
+        return NULL;
+
+    //skip all delimiting characters with the current position
+    curr_position = skipDelimiters(curr_position, delim);
+   
+
+    //get the count of words
+    found_word = countWords(curr_position, delim);
+
+     // Get the total length of the string
+    temp = curr_position;
+    for (; *temp != '\0'; temp++)
     {
-        
+        if (strchr(delim, *temp) != NULL)
+        {
+            if (found_word)
+                break;
+        }
     }
+
+    //get the total length of the string
+    total_len = temp - curr_position;
+
+    //store the word in the heap
+    store = malloc(sizeof(char) * total_len + 1);
+    if (store == NULL)
+        return NULL;
+
+    for (i = 0; i < total_len; i++)
+    {
+        store[i] = curr_position[i];
+    }
+    store[i] = '\0';
+
+    curr_position += total_len;
+
+    return store;
 }
 
 int main()
 {
-        char *src = "Jesus loves you";
+        char *src = " i am";
         char *str = malloc(sizeof(char) * strlen(src));
         strcpy(str, src);
         char *delim = " ";
         char *token;
         int i = 0;
 
-        token = strtok(str, delim);
+        token = _strtok(str, delim);
+        // token = strtok(str, delim);
         for (; token != NULL; i++)
         {
-                //token = strtok(str, delim);
                 printf("%s\n", token);
-                token = strtok(NULL, delim);
+                token = _strtok(NULL, delim);
+                // token = strtok(NULL, delim);
+
         }
 
         free(str);
